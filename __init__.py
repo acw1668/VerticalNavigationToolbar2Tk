@@ -1,8 +1,5 @@
 import tkinter as tk
-
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
-from matplotlib.figure import Figure
-import numpy as np
+from matplotlib.backends.backend_tkagg import NavigationToolbar2Tk
 
 class VerticalNavigationToolbar2Tk(NavigationToolbar2Tk):
    def __init__(self, canvas, window):
@@ -23,21 +20,3 @@ class VerticalNavigationToolbar2Tk(NavigationToolbar2Tk):
    # disable showing mouse position in toolbar
    def set_message(self, s):
       pass
-
-if __name__ == '__main__':
-    root = tk.Tk()
-    root.wm_title("Embedding in Tk")
-
-    fig = Figure(figsize=(5, 4), dpi=100)
-    t = np.arange(0, 3, .01)
-    fig.add_subplot().plot(t, 2 * np.sin(2 * np.pi * t))
-
-    canvas = FigureCanvasTkAgg(fig, master=root)
-    canvas.draw()
-    canvas.get_tk_widget().pack(side=tk.RIGHT, fill=tk.BOTH, expand=1)
-
-    toolbar = VerticalNavigationToolbar2Tk(canvas, root)
-    toolbar.update()
-    toolbar.pack(side=tk.LEFT, fill=tk.Y)
-
-    root.mainloop()
